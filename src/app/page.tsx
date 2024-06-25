@@ -1,7 +1,6 @@
 'use client'
-import { Line } from 'react-chartjs-2'
 import {
-  Chart as ChartJS,
+  Chart,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -11,8 +10,11 @@ import {
   Legend,
 } from 'chart.js'
 import { generateLabels } from '@/utils/lib'
+import { Line } from 'react-chartjs-2'
+import { useEffect, useState } from 'react'
+import { User } from '@/utils/types'
 
-ChartJS.register(
+Chart.register(
   CategoryScale,
   LinearScale,
   PointElement,
@@ -36,5 +38,13 @@ const data = {
 }
 
 export default function LineChart() {
+  const [user, setUser] = useState<User>()
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const userEncrypted = localStorage.getItem('user') 
+    }
+  }, [])
+
   return <Line data={data} />
 }

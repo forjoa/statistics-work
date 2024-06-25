@@ -13,6 +13,7 @@ import { generateLabels } from '@/utils/lib'
 import { Line } from 'react-chartjs-2'
 import { useEffect, useState } from 'react'
 import { User } from '@/utils/types'
+import jwt from 'jsonwebtoken'
 
 Chart.register(
   CategoryScale,
@@ -42,7 +43,7 @@ export default function LineChart() {
 
   useEffect(() => {
     if (typeof window !== undefined) {
-      const userEncrypted = localStorage.getItem('user') 
+      const userEncrypted =   localStorage.getItem('user') 
     }
   }, [])
 

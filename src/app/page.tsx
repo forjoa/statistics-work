@@ -9,9 +9,8 @@ import {
   Title,
   Tooltip,
   Legend,
-  type ChartOptions,
 } from 'chart.js'
-import { eachDayOfInterval, format, startOfMonth, endOfMonth } from 'date-fns'
+import { generateLabels } from '@/utils/lib'
 
 ChartJS.register(
   CategoryScale,
@@ -23,24 +22,12 @@ ChartJS.register(
   Legend
 )
 
-// Función para generar etiquetas para todos los días del mes actual
-const generateLabels = () => {
-  const now = new Date()
-  const days = eachDayOfInterval({
-    start: startOfMonth(now),
-    end: endOfMonth(now),
-  })
-  return days.map((day) => format(day, 'dd/MM'))
-}
-
-const labels = generateLabels()
-
 const data = {
-  labels: labels,
+  labels: generateLabels(),
   datasets: [
     {
-      label: 'My First Dataset',
-      data: [65, 59, 80, 81, 56, 55, 40],
+      label: 'Package delivered',
+      data: [65, 59, 80, 81, 56, 55, 40, 0],
       fill: false,
       backgroundColor: 'rgb(75, 192, 192)',
       borderColor: 'rgba(75, 192, 192, 0.2)',
@@ -48,19 +35,6 @@ const data = {
   ],
 }
 
-const options: ChartOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Line Chart',
-    },
-  },
-}
-
 export default function LineChart() {
-  return <Line data={data} options={options} />
+  return <Line data={data} />
 }

@@ -53,5 +53,10 @@ export default function LineChart() {
     return <Login />
   }
 
-  return <Line data={data} />
+  return (
+    <div>
+      {user && <p className='text-black'>Hi, {user.user.name}</p>}
+      <Line data={data} />
+    </div>
+  )
 }

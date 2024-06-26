@@ -33,8 +33,8 @@ const data = {
       label: 'Package delivered',
       data: [65, 59, 80, 81, 56, 55, 40, 0],
       fill: false,
-      backgroundColor: 'rgb(75, 192, 192)',
-      borderColor: 'rgba(75, 192, 192, 0.2)',
+      backgroundColor: 'rgb(61, 99, 221)',
+      borderColor: 'rgba(61, 99, 221, 0.4)',
     },
   ],
 }
@@ -45,7 +45,8 @@ export default function LineChart() {
   useEffect(() => {
     if (typeof window !== undefined) {
       const userEncrypted = localStorage.getItem('userStatistic')
-      setUser(jwt.decode(userEncrypted as string) as unknown as User)
+      const userDecrypted = jwt.decode(userEncrypted as string) as any
+      setUser(userDecrypted?.user)
     }
   }, [])
 
@@ -55,7 +56,7 @@ export default function LineChart() {
 
   return (
     <div>
-      {user && <p className='text-black'>Hi, {user.user.name}</p>}
+      {user && <p className='text-black'>Hi, {user.name}</p>}
       <Line data={data} />
     </div>
   )

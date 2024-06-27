@@ -19,6 +19,7 @@ import {
   IconSquareRoundedPlus,
   IconChartDots,
   IconLogout,
+  IconPackage,
 } from '@tabler/icons-react'
 import { Toaster, toast } from 'sonner'
 
@@ -48,6 +49,8 @@ const initialData = {
 export default function LineChart() {
   const [user, setUser] = useState<User>()
   const [data, setData] = useState(initialData)
+  const [avarage, setAvarage] = useState<number>()
+  const [total, setTotal] = useState<number>()
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -86,6 +89,15 @@ export default function LineChart() {
           },
         ],
       }))
+
+      const subtotal = packageData.reduce(
+        (acc: number, curr: number) => acc + curr,
+        0
+      )
+      setAvarage(
+        (subtotal / packageData.length).toFixed(1) as unknown as number
+      )
+      setTotal(subtotal)
     } catch (error) {
       toast.error(('Error fetching package data: ' + error) as string)
     }
@@ -117,14 +129,32 @@ export default function LineChart() {
           Log out
         </button>
       </nav>
-      <main className='m-5'>
-        <p className='text-black'>
-          Hi, {user.name}. <br />
-          <span className='text-[#797B86]'>
-            Here you have the statistics from this month.
-          </span>
-        </p>
-        <Line data={data} />
+      <main className='my-5 mr-5'>
+        <div className='bg-[#EEEEF0] p-4 rounded-lg'>
+          <p className='text-black'>
+            Hi, {user.name}. <br />
+            <span className='text-[#797B86]'>
+              Here you have the statistics from this month.
+            </span>
+          </p>
+          <Line data={data} />
+        </div>
+        <div className='text-black flex gap-5 w-full'>
+          <div className='mt-5 bg-[#EEEEF0] p-4 rounded-lg w-1/2'>
+            <p>Avarage</p>
+            <p className='text-8xl flex w-full justify-center'>
+              {avarage}
+              <IconPackage stroke={1.5} color='#3D63DD' size={95} />
+            </p>
+          </div>
+          <div className='mt-5 bg-[#EEEEF0] p-4 rounded-lg w-1/2'>
+            <p>Total amount</p>
+            <p className='text-8xl flex w-full justify-center'>
+              {total}
+              <IconPackage stroke={1.5} color='#3D63DD' size={95} />
+            </p>
+          </div>
+        </div>
       </main>
     </div>
   )

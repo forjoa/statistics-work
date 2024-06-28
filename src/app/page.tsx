@@ -22,6 +22,8 @@ import {
   IconPackage,
 } from '@tabler/icons-react'
 import { Toaster, toast } from 'sonner'
+import Input from '@/components/ui/Input'
+import Button from '@/components/ui/Button'
 
 Chart.register(
   CategoryScale,
@@ -51,6 +53,7 @@ export default function LineChart() {
   const [data, setData] = useState(initialData)
   const [avarage, setAvarage] = useState<number>()
   const [total, setTotal] = useState<number>()
+  const [showModal, setShowModal] = useState<boolean>(false)
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -119,7 +122,10 @@ export default function LineChart() {
           <p className='flex gap-2'>
             Statistics Work <IconChartDots color='#3D63DD' stroke={1.5} />
           </p>
-          <button className='bg-[#e5e5e6] p-4 rounded text-black hover:bg-[#B2B3BD] transition-all flex gap-3'>
+          <button
+            className='bg-[#e5e5e6] p-4 rounded text-black hover:bg-[#B2B3BD] transition-all flex gap-3'
+            onClick={() => setShowModal(true)}
+          >
             <IconSquareRoundedPlus stroke={1.5} color='#3D63DD' />
             Add new day
           </button>
@@ -156,6 +162,24 @@ export default function LineChart() {
           </div>
         </div>
       </main>
+      {showModal && (
+        <div className='absolute text-black h-screen w-screen grid place-items-center bg-black bg-opacity-30'>
+          <div className='bg-white p-6 rounded-lg flex flex-col gap-4'>
+            <p>Add new day</p>
+            <form className='flex flex-col gap-3'>
+              <div className='flex flex-col'>
+                <label htmlFor='date'>Date</label>
+                <Input type='date' name='date' id='date' />
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='amount'>Amount</label>
+                <Input type='number' name='amount' id='amount' />
+              </div>
+              <Button value='Upload'></Button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -165,6 +165,12 @@ export default function LineChart() {
       {showModal && (
         <div className='absolute text-black h-screen w-screen grid place-items-center bg-black bg-opacity-30'>
           <div className='bg-white p-6 rounded-lg flex flex-col gap-4'>
+            <button
+              className='w-full flex justify-end -mb-6'
+              onClick={() => setShowModal(false)}
+            >
+              &times;
+            </button>
             <p>Add new day</p>
             <form className='flex flex-col gap-3'>
               <div className='flex flex-col'>
@@ -175,7 +181,7 @@ export default function LineChart() {
                 <label htmlFor='amount'>Amount</label>
                 <Input type='number' name='amount' id='amount' />
               </div>
-              <Button value='Upload'></Button>
+              <Button value='Upload' type='submit'></Button>
             </form>
           </div>
         </div>

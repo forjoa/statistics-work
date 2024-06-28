@@ -141,6 +141,13 @@ export default function LineChart() {
     }
   }
 
+  const logout = () => {
+    if (typeof window !== undefined) {
+      localStorage.removeItem('userStatistic')
+      window.location.reload()
+    }
+  }
+
   if (!user) {
     return <Login />
   }
@@ -161,7 +168,7 @@ export default function LineChart() {
             Add new day
           </button>
         </div>
-        <button className='bg-red-500 bg-opacity-0 flex p-4 gap-3 text-red-500 rounded transition-all hover:bg-opacity-10'>
+        <button className='bg-red-500 bg-opacity-0 flex p-4 gap-3 text-red-500 rounded transition-all hover:bg-opacity-10' onClick={logout}>
           <IconLogout color='red' stroke={1.5} />
           Log out
         </button>

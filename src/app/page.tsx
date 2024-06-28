@@ -11,7 +11,7 @@ import {
 } from 'chart.js'
 import { generateLabels } from '@/utils/lib'
 import { Line } from 'react-chartjs-2'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, FormEvent } from 'react'
 import { User } from '@/utils/types'
 import jwt from 'jsonwebtoken'
 import Login from '@/components/Login'
@@ -54,6 +54,8 @@ export default function LineChart() {
   const [avarage, setAvarage] = useState<number>()
   const [total, setTotal] = useState<number>()
   const [showModal, setShowModal] = useState<boolean>(false)
+  const [newDate, setNewDate] = useState<string>()
+  const [newAmount, setNewAmount] = useState<number>()
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -109,6 +111,35 @@ export default function LineChart() {
   useEffect(() => {
     fetchData()
   }, [fetchData])
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    try {
+      const result = await fetch('/api/newday', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/json',
+        },
+        body: JSON.stringify({ newDate, newAmount }),
+      })
+
+      const { success, message } = await result.json()
+
+      if (success) {
+        toast.success(message)
+        setTimeout(() => {
+          if (typeof window !== undefined) {
+            window.location.reload()
+          }
+        }, 5000)
+      } else {
+        toast.error(message)
+      }
+    } catch {
+      toast.error('Error while sending the data')
+    }
+  }
 
   if (!user) {
     return <Login />
@@ -172,14 +203,26 @@ export default function LineChart() {
               &times;
             </button>
             <p>Add new day</p>
-            <form className='flex flex-col gap-3'>
+            <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
               <div className='flex flex-col'>
                 <label htmlFor='date'>Date</label>
-                <Input type='date' name='date' id='date' />
+                <Input
+                  type='date'
+                  name='date'
+                  id='date'
+                  onChange={(e) => setNewDate(e.target.value)}
+                />
               </div>
               <div className='flex flex-col'>
                 <label htmlFor='amount'>Amount</label>
-                <Input type='number' name='amount' id='amount' />
+                <Input
+                  type='number'
+                  name='amount'
+                  id='amount'
+                  onChange={(e) =>
+                    setNewAmount(e.target.value as unknown as number)
+                  }
+                />
               </div>
               <Button value='Upload' type='submit'></Button>
             </form>

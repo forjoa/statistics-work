@@ -121,7 +121,7 @@ export default function LineChart() {
         headers: {
           'Content-Type': 'Application/json',
         },
-        body: JSON.stringify({ newDate, newAmount }),
+        body: JSON.stringify({ newDate, newAmount, id: user?.id }),
       })
 
       const { success, message } = await result.json()

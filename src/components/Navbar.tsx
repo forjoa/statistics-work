@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAddDay, onLogout }) => {
       <nav
         className={`text-black bg-[#EEEEF0] m-5 p-4 rounded-lg flex flex-col justify-between ${
           isNavOpen ? 'block' : 'hidden'
-        } md:flex`}
+        } md:flex md:h-[96%]`}
       >
         <div className='flex flex-col gap-2'>
           <p className='hidden md:flex gap-2'>

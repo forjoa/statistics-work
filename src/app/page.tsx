@@ -163,10 +163,18 @@ export default function LineChart() {
           Statistics Work <IconChartDots color='#3D63DD' stroke={1.5} />
         </p>
         <button onClick={() => setIsNavOpen(!isNavOpen)}>
-          {isNavOpen ? <IconX size={30} color='#3D63DD' /> : <IconMenu2 size={30} color='#3D63DD' />}
+          {isNavOpen ? (
+            <IconX size={30} color='#3D63DD' />
+          ) : (
+            <IconMenu2 size={30} color='#3D63DD' />
+          )}
         </button>
       </div>
-      <nav className={`text-black bg-[#EEEEF0] m-5 p-4 rounded-lg flex flex-col justify-between ${isNavOpen ? 'block' : 'hidden'} md:flex`}>
+      <nav
+        className={`text-black bg-[#EEEEF0] m-5 p-4 rounded-lg flex flex-col justify-between ${
+          isNavOpen ? 'block' : 'hidden'
+        } md:flex`}
+      >
         <div className='flex flex-col gap-2'>
           <p className='flex gap-2'>
             Statistics Work <IconChartDots color='#3D63DD' stroke={1.5} />
@@ -179,7 +187,10 @@ export default function LineChart() {
             Add new day
           </button>
         </div>
-        <button className='bg-red-500 bg-opacity-0 flex p-4 gap-3 text-red-500 rounded transition-all hover:bg-opacity-10' onClick={logout}>
+        <button
+          className='bg-red-500 bg-opacity-0 flex p-4 gap-3 text-red-500 rounded transition-all hover:bg-opacity-10'
+          onClick={logout}
+        >
           <IconLogout color='red' stroke={1.5} />
           Log out
         </button>

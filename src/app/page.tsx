@@ -20,6 +20,8 @@ import {
   IconChartDots,
   IconLogout,
   IconPackage,
+  IconMenu2,
+  IconX,
 } from '@tabler/icons-react'
 import { Toaster, toast } from 'sonner'
 import Input from '@/components/ui/Input'
@@ -56,6 +58,7 @@ export default function LineChart() {
   const [showModal, setShowModal] = useState<boolean>(false)
   const [newDate, setNewDate] = useState<string>()
   const [newAmount, setNewAmount] = useState<number>()
+  const [isNavOpen, setIsNavOpen] = useState<boolean>(false)
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -153,9 +156,17 @@ export default function LineChart() {
   }
 
   return (
-    <div className='grid grid-cols-[0.5fr_1.5fr] grid-rows-[1fr] gap-0 h-screen'>
+    <div className='grid grid-cols-1 md:grid-cols-[0.5fr_1.5fr] grid-rows-[auto_1fr] md:grid-rows-1 gap-0 h-screen'>
       <Toaster position='top-center' richColors />
-      <nav className='text-black bg-[#EEEEF0] m-5 p-4 rounded-lg flex flex-col justify-between'>
+      <div className='md:hidden flex justify-between p-4 bg-[#EEEEF0] text-black'>
+        <p className='flex items-center gap-2'>
+          Statistics Work <IconChartDots color='#3D63DD' stroke={1.5} />
+        </p>
+        <button onClick={() => setIsNavOpen(!isNavOpen)}>
+          {isNavOpen ? <IconX size={30} color='#3D63DD' /> : <IconMenu2 size={30} color='#3D63DD' />}
+        </button>
+      </div>
+      <nav className={`text-black bg-[#EEEEF0] m-5 p-4 rounded-lg flex flex-col justify-between ${isNavOpen ? 'block' : 'hidden'} md:flex`}>
         <div className='flex flex-col gap-2'>
           <p className='flex gap-2'>
             Statistics Work <IconChartDots color='#3D63DD' stroke={1.5} />
@@ -173,7 +184,7 @@ export default function LineChart() {
           Log out
         </button>
       </nav>
-      <main className='my-5 mr-5'>
+      <main className='my-5 mx-5 md:-ml-0'>
         <div className='bg-[#EEEEF0] p-4 rounded-lg'>
           <p className='text-black'>
             Hi, {user.name}. <br />
@@ -183,15 +194,15 @@ export default function LineChart() {
           </p>
           <Line data={data} />
         </div>
-        <div className='text-black flex gap-5 w-full'>
-          <div className='mt-5 bg-[#EEEEF0] p-4 rounded-lg w-1/2'>
+        <div className='text-black flex flex-col md:flex-row gap-5 w-full'>
+          <div className='mt-5 bg-[#EEEEF0] p-4 rounded-lg md:w-1/2'>
             <p>Avarage</p>
             <p className='text-8xl flex w-full justify-center'>
               {avarage}
               <IconPackage stroke={1.5} color='#3D63DD' size={95} />
             </p>
           </div>
-          <div className='mt-5 bg-[#EEEEF0] p-4 rounded-lg w-1/2'>
+          <div className='mt-5 bg-[#EEEEF0] p-4 rounded-lg md:w-1/2'>
             <p>Total amount</p>
             <p className='text-8xl flex w-full justify-center'>
               {total}

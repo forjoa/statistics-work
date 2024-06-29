@@ -176,7 +176,7 @@ export default function LineChart() {
         } md:flex`}
       >
         <div className='flex flex-col gap-2'>
-          <p className='flex gap-2'>
+          <p className='hidden md:flex gap-2'>
             Statistics Work <IconChartDots color='#3D63DD' stroke={1.5} />
           </p>
           <button
@@ -205,7 +205,7 @@ export default function LineChart() {
           </p>
           <Line data={data} />
         </div>
-        <div className='text-black flex flex-col md:flex-row gap-5 w-full'>
+        <div className='text-black flex flex-col md:flex-row md:gap-5 w-full'>
           <div className='mt-5 bg-[#EEEEF0] p-4 rounded-lg md:w-1/2'>
             <p>Avarage</p>
             <p className='text-8xl flex w-full justify-center'>

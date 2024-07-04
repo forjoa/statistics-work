@@ -57,41 +57,44 @@ export const usePackages = (user: User | undefined) => {
     }
   }, [user])
 
-  const fetchDataByMonth = useCallback(async (month: string) => {
-    if (!user) return
+  const fetchDataByMonth = useCallback(
+    async (month: string) => {
+      if (!user) return
 
-    try {
-      const response = await fetch('/api/mypackagesbymonth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: user.id, month }),
-      })
+      try {
+        const response = await fetch('/api/mypackagesbymonth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: user.id, month }),
+        })
 
-      if (!response.ok) {
-        toast.error('Failed to fetch data')
-        return
+        if (!response.ok) {
+          toast.error('Failed to fetch data')
+          return
+        }
+
+        const { rows } = await response.json()
+        const packageData = rows.map((r: any) => r.quantity)
+
+        setData((prevData) => ({
+          ...prevData,
+          datasets: [{ ...prevData.datasets[0], data: packageData }],
+        }))
+
+        const subtotal = packageData.reduce(
+          (acc: number, curr: number) => acc + curr,
+          0
+        )
+        setAverage(
+          (subtotal / packageData.length).toFixed(1) as unknown as number
+        )
+        setTotal(subtotal)
+      } catch (error) {
+        toast.error('Error fetching package data: ' + error)
       }
-
-      const { rows } = await response.json()
-      const packageData = rows.map((r: any) => r.quantity)
-
-      setData((prevData) => ({
-        ...prevData,
-        datasets: [{ ...prevData.datasets[0], data: packageData }],
-      }))
-
-      const subtotal = packageData.reduce(
-        (acc: number, curr: number) => acc + curr,
-        0
-      )
-      setAverage(
-        (subtotal / packageData.length).toFixed(1) as unknown as number
-      )
-      setTotal(subtotal)
-    } catch (error) {
-      toast.error('Error fetching package data: ' + error)
-    }
-  }, [user])
+    },
+    [user]
+  )
 
   useEffect(() => {
     fetchData()

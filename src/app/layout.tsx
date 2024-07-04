@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import { useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import AddDayModal from '@/components/AddDayModal'
+import SelectMonthModal from '@/components/SelectMonthModal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +17,7 @@ export default function RootLayout({
 }>) {
   const { user, logout } = useAuth()
   const [showModal, setShowModal] = useState<boolean>(false)
+  const [showModalMonth, setShowModalMonth] = useState<boolean>(false)
 
   const handleSubmit = async (date: string, amount: number) => {
     try {
@@ -54,7 +56,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className='grid grid-cols-1 md:grid-cols-[0.5fr_1.5fr] grid-rows-[auto_1fr] md:grid-rows-1 gap-0 h-screen'>
           <Toaster position='top-center' richColors />
-          <Navbar onAddDay={() => setShowModal(true)} onLogout={logout} />
+          <Navbar
+            onAddDay={() => setShowModal(true)}
+            onLogout={logout}
+            onSelectMonth={() => setShowModalMonth(true)}
+          />
           {children}
         </div>
         {showModal && (
@@ -62,6 +68,9 @@ export default function RootLayout({
             onClose={() => setShowModal(false)}
             onSubmit={handleSubmit}
           />
+        )}
+        {showModalMonth && (
+          <SelectMonthModal onClose={() => setShowModalMonth(false)} />
         )}
       </body>
     </html>

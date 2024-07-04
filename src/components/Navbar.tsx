@@ -5,14 +5,20 @@ import {
   IconLogout,
   IconMenu2,
   IconX,
+  IconCalendarMonth,
 } from '@tabler/icons-react'
 
 type NavbarProps = {
   onAddDay: () => void
   onLogout: () => void
+  onSelectMonth: () => void
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onAddDay, onLogout }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  onAddDay,
+  onLogout,
+  onSelectMonth,
+}) => {
   const [isNavOpen, setIsNavOpen] = useState(false)
 
   return (
@@ -44,6 +50,13 @@ const Navbar: React.FC<NavbarProps> = ({ onAddDay, onLogout }) => {
           >
             <IconSquareRoundedPlus stroke={1.5} color='#3D63DD' />
             Add new day
+          </button>
+          <button
+            className='bg-[#e5e5e6] p-4 rounded text-black hover:bg-[#B2B3BD] transition-all flex gap-3'
+            onClick={onSelectMonth}
+          >
+            <IconCalendarMonth stroke={1.5} color='#3D63DD' />
+            See other month
           </button>
         </div>
         <button

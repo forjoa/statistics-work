@@ -17,7 +17,7 @@ const AddDayModal: React.FC<AddDayModalProps> = ({ onClose, onSubmit }) => {
   }
 
   return (
-    <div className='absolute text-black h-screen w-screen grid place-items-center bg-black bg-opacity-30'>
+    <div className='absolute top-0 left-0 text-black h-screen w-screen grid place-items-center bg-black bg-opacity-30'>
       <div className='bg-white p-6 rounded-lg flex flex-col gap-4'>
         <button className='w-full flex justify-end -mb-6' onClick={onClose}>
           &times;

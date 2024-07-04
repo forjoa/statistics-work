@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster, toast } from 'sonner'
 import Navbar from '@/components/Navbar'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import AddDayModal from '@/components/AddDayModal'
 import SelectMonthModal from '@/components/SelectMonthModal'
@@ -61,7 +61,7 @@ export default function RootLayout({
             onLogout={logout}
             onSelectMonth={() => setShowModalMonth(true)}
           />
-          {children}
+          <Suspense fallback={<p>Loading...</p>}>{children}</Suspense>
         </div>
         {showModal && (
           <AddDayModal

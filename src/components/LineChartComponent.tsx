@@ -20,16 +20,14 @@ Chart.register(
   Legend
 )
 
-type LineChartComponentProps = {
+interface LineChartComponentProps {
   data: any
 }
 
-const LineChartComponent: React.FC<LineChartComponentProps> = ({ data }) => {
+export default function LineChartComponent({ data }: LineChartComponentProps) {
   return (
     <div className='bg-[#EEEEF0] p-4 rounded-lg'>
       <Line data={data} />
     </div>
   )
 }
-
-export default LineChartComponent

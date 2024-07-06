@@ -1,11 +1,11 @@
 import { IconCurrencyEuro, IconPackage } from '@tabler/icons-react'
 
-type StatisticsProps = {
+interface StatisticsProps {
   average: number | undefined
   total: number | undefined
 }
 
-const Statistics: React.FC<StatisticsProps> = ({ average, total }) => {
+export default function Statistics({ average, total }: StatisticsProps) {
   return (
     <div className='text-black flex flex-col md:flex-row md:gap-5 w-full'>
       <div className='mt-5 bg-[#EEEEF0] p-4 rounded-lg md:w-1/2'>
@@ -32,5 +32,3 @@ const Statistics: React.FC<StatisticsProps> = ({ average, total }) => {
     </div>
   )
 }
-
-export default Statistics

@@ -2,12 +2,12 @@ import { FormEvent, useState } from 'react'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 
-type AddDayModalProps = {
+interface AddDayModalProps {
   onClose: () => void
   onSubmit: (date: string, amount: number) => void
 }
 
-const AddDayModal: React.FC<AddDayModalProps> = ({ onClose, onSubmit }) => {
+export default function AddDayModal({ onClose, onSubmit }: AddDayModalProps) {
   const [newDate, setNewDate] = useState<string>('')
   const [newAmount, setNewAmount] = useState<number>(0)
 
@@ -50,5 +50,3 @@ const AddDayModal: React.FC<AddDayModalProps> = ({ onClose, onSubmit }) => {
     </div>
   )
 }
-
-export default AddDayModal

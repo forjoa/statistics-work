@@ -3,7 +3,7 @@ import Input from './ui/Input'
 import Button from './ui/Button'
 import { useRouter } from 'next/navigation'
 
-type SelectMonthProps = {
+interface SelectMonthProps {
   onClose: () => void
 }
 

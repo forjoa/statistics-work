@@ -8,17 +8,17 @@ import {
   IconCalendarMonth,
 } from '@tabler/icons-react'
 
-type NavbarProps = {
+interface NavbarProps {
   onAddDay: () => void
   onLogout: () => void
   onSelectMonth: () => void
 }
 
-const Navbar: React.FC<NavbarProps> = ({
+export default function Navbar({
   onAddDay,
   onLogout,
   onSelectMonth,
-}) => {
+}: NavbarProps) {
   const [isNavOpen, setIsNavOpen] = useState(false)
 
   return (
@@ -70,5 +70,3 @@ const Navbar: React.FC<NavbarProps> = ({
     </div>
   )
 }
-
-export default Navbar

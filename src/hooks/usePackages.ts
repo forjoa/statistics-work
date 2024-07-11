@@ -37,14 +37,15 @@ export const usePackages = (user: User | undefined) => {
       }
 
       const { rows } = await response.json()
-      const packageData = rows.map((r: any) => r.quantity)
+      const packageData = rows.map((r: any) => r)
 
       setData((prevData) => ({
         ...prevData,
         datasets: [{ ...prevData.datasets[0], data: packageData }],
       }))
 
-      const subtotal = packageData.reduce(
+      const packageAmount = packageData.map((r: any) => r.quantity)
+      const subtotal = packageAmount.reduce(
         (acc: number, curr: number) => acc + curr,
         0
       )
@@ -74,14 +75,15 @@ export const usePackages = (user: User | undefined) => {
         }
 
         const { rows } = await response.json()
-        const packageData = rows.map((r: any) => r.quantity)
+        const packageData = rows.map((r: any) => r)
 
         setData((prevData) => ({
           ...prevData,
           datasets: [{ ...prevData.datasets[0], data: packageData }],
         }))
 
-        const subtotal = packageData.reduce(
+        const packageAmount = packageData.map((r: any) => r.quantity)
+        const subtotal = packageAmount.reduce(
           (acc: number, curr: number) => acc + curr,
           0
         )

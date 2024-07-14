@@ -23,8 +23,8 @@ export default function LineChartComponent({ data }: LineChartComponentProps) {
   const [dataModified, setDataModified] = useState<DataI[]>([])
 
   useEffect(() => {
-    const modifiedData = data.datasets[0].data.map((element: any) => {
-      const { userId, day, quantity } = element
+    const modifiedData = data.map((element: any) => {
+      const { day, quantity } = element
       return {
         name: (day + '').substring(5),
         quantity: parseFloat(quantity), 
@@ -33,8 +33,6 @@ export default function LineChartComponent({ data }: LineChartComponentProps) {
 
     setDataModified(modifiedData)
   }, [data])
-
-  console.log(dataModified)
 
   return (
     <div className='bg-[#EEEEF0] rounded-lg text-black'>

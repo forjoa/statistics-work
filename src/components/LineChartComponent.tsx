@@ -11,7 +11,7 @@ import {
 } from 'recharts'
 
 interface LineChartComponentProps {
-  data: any
+  data: DataI[]
 }
 
 interface DataI {

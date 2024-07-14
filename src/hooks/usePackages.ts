@@ -1,4 +1,3 @@
-import { generateLabels } from '@/utils/lib'
 import { User } from '@/utils/types'
 import { useState, useEffect, useCallback } from 'react'
 import { toast } from 'sonner'

@@ -26,8 +26,8 @@ export default function LineChartComponent({ data }: LineChartComponentProps) {
     const modifiedData = data.map((element: any) => {
       const { day, quantity } = element
       return {
-        name: (day + '').substring(5),
-        quantity: parseFloat(quantity), 
+        name: (day + '').substring(5).split('-').reverse().join('/'),
+        quantity: parseFloat(quantity),
       }
     })
 

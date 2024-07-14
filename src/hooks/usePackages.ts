@@ -3,21 +3,8 @@ import { User } from '@/utils/types'
 import { useState, useEffect, useCallback } from 'react'
 import { toast } from 'sonner'
 
-const initialData = {
-  labels: generateLabels(),
-  datasets: [
-    {
-      label: 'Package delivered',
-      data: [],
-      fill: false,
-      backgroundColor: 'rgb(61, 99, 221)',
-      borderColor: 'rgba(61, 99, 221, 0.4)',
-    },
-  ],
-}
-
 export const usePackages = (user: User | undefined) => {
-  const [data, setData] = useState(initialData)
+  const [data, setData] = useState([])
   const [average, setAverage] = useState<number>()
   const [total, setTotal] = useState<number>()
 
@@ -39,10 +26,7 @@ export const usePackages = (user: User | undefined) => {
       const { rows } = await response.json()
       const packageData = rows.map((r: any) => r)
 
-      setData((prevData) => ({
-        ...prevData,
-        datasets: [{ ...prevData.datasets[0], data: packageData }],
-      }))
+      setData(packageData)
 
       const packageAmount = packageData.map((r: any) => r.quantity)
       const subtotal = packageAmount.reduce(
@@ -77,10 +61,7 @@ export const usePackages = (user: User | undefined) => {
         const { rows } = await response.json()
         const packageData = rows.map((r: any) => r)
 
-        setData((prevData) => ({
-          ...prevData,
-          datasets: [{ ...prevData.datasets[0], data: packageData }],
-        }))
+        setData(packageData)
 
         const packageAmount = packageData.map((r: any) => r.quantity)
         const subtotal = packageAmount.reduce(
